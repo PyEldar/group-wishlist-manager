@@ -1,0 +1,249 @@
+:root {
+    --primary: #c0392b;
+    --secondary: #27ae60;
+    --bg: #fdfbf7;
+    --text: #2c3e50;
+    --light-gray: #ecf0f1;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+}
+
+nav {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a, nav span {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 15px;
+}
+
+@media (max-width: 650px) {
+    .menu {
+      flex-direction: column;
+    }
+  }
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.form-login {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+  
+.form-login button {
+    flex: 0 0 auto; /* keep button sized to content */
+}
+
+@media (max-width: 650px) {
+    .form-login {
+      flex-direction: column;
+    }
+  }
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background: #7f8c8d;
+}
+
+.auth-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.wish-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.wish-list li {
+    background: white;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eee;
+}
+
+.wish-list li.taken {
+    background: #f0f0f0;
+    color: #999;
+}
+
+.family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.family-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-top: 5px solid var(--secondary);
+}
+
+.btn-reserve {
+    background: var(--secondary);
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.btn-reserved {
+    background: #f39c12;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.btn-cancel {
+    color: #c0392b;
+    text-decoration: underline;
+    font-size: 0.9rem;
+}
+
+.status-taken {
+    font-size: 0.9rem;
+    color: #95a5a6;
+    font-style: italic;
+}
+
+.delete-btn {
+    color: #c0392b;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0 10px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert.error {
+    background: #fadbd8;
+    color: #721c24;
+}
+
+.group-info-banner {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    text-align: center;
+    border-left: 5px solid var(--primary);
+}
+
+.invite-box {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.invite-box .code {
+    background: #ecf0f1;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--text);
+    border: 1px dashed #bdc3c7;
+}
+
+.radio-group {
+    display: inline-block;
+    margin: 15px 0;
+    text-align: left;
+}
+
+.radio-group label {
+    cursor: pointer;
+    font-weight: bold;
+}

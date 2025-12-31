@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="group-info-banner">
+    <h1>Rodina: {{ current_user.group.name }}</h1>
+    <div class="invite-box">
+        Pozvi ostatní tímto kódem: <span class="code">{{ current_user.group.join_code }}</span>
+    </div>
+</div>
+<div class="my-section">
+    <h2>🎁 Moje přání</h2>
+    <form action="{{ url_for('add_wish') }}" method="POST" class="add-form">
+        <input type="text" name="text" placeholder="Co si přeješ?" required>
+        <input type="text" name="url" placeholder="Odkaz (volitelné)">
+        <button type="submit">Přidat</button>
+    </form>
+    <ul class="wish-list">
+        {% for wish in current_user.wishes %}
+        <li>
+            <div class="wish-info">
+                <span class="wish-text">{{ wish.text }}</span>
+                {% if wish.url %}
+                    <a href="{{ wish.url }}" target="_blank" class="link-icon">🔗</a>
+                {% endif %}
+            </div>
+            <a href="{{ url_for('delete_wish', wish_id=wish.id) }}" class="delete-btn">×</a>
+        </li>
+        {% else %}
+        <p class="empty">Zatím sis nic nepřál(a).</p>
+        {% endfor %}
+    </ul>
+</div>
+<hr>
+<h2>🎅 Přání ostatních</h2>
+<div class="family-grid">
+    {% for user in users %}
+        {% if user != current_user %}
+        <div class="family-card">
+            <h3>{{ user.username }}</h3>
+            <ul class="wish-list">
+                {% for wish in user.wishes %}
+                <li class="{% if wish.reserved_by and wish.reserved_by != current_user.id %}taken{% endif %}">
+                    <div class="wish-content">
+                        <strong>{{ wish.text }}</strong>
+                        {% if wish.url %}
+                            <a href="{{ wish.url }}" target="_blank">🔗</a>
+                        {% endif %}
+                    </div>
+                    <div class="actions">
+                        {% if wish.reserved_by == current_user.id %}
+                            <a href="{{ url_for('toggle_reserve', wish_id=wish.id) }}" class="btn-reserved">✅ Rezervovano</a>
+                        {% elif wish.reserved_by %}
+                            <span class="status-taken">Zabrané</span>
+                        {% else %}
+                            <a href="{{ url_for('toggle_reserve', wish_id=wish.id) }}" class="btn-reserve">Rezervovat</a>
+                        {% endif %}
+                    </div>
+                </li>
+                {% else %}
+                <p class="empty">Zatím nic.</p>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

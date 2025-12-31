@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>🛒 Můj nákupní seznam</h2>
+<p>Tohle jsi slíbil(a), že obstaráš:</p>
+<div class="shopping-list">
+    {% if wishes %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Pro koho</th>
+                    <th>Co</th>
+                    <th>Odkaz</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wish in wishes %}
+                <tr>
+                    <td><strong>{{ wish.owner.username }}</strong></td>
+                    <td>{{ wish.text }}</td>
+                    <td>
+                        {% if wish.url %}
+                        <a href="{{ wish.url }}" target="_blank">Otevřít</a>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('toggle_reserve', wish_id=wish.id) }}" class="btn-cancel">Zrušit rezervaci</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty-state">
+            <p>Zatím nemáš nic rezervovaného.</p>
+            <a href="{{ url_for('dashboard') }}" class="btn-primary">Jít vybírat dárky</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container">
+    <div class="card">
+        <h2>Přihlášení</h2>
+        <form class="form-login" action="{{ url_for('login') }}" method="POST">
+            <input type="text" name="username" placeholder="Uživatelské jméno" required>
+            <input type="password" name="password" placeholder="Heslo" required>
+            <button type="submit">Přihlásit</button>
+        </form>
+    </div>
+    <div class="card registration-card">
+        <h2>Nová registrace</h2>
+        <form action="{{ url_for('register') }}" method="POST">
+            <input type="text" name="username" placeholder="Tvé jméno" required>
+            <input type="password" name="password" placeholder="Heslo" required>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="reg_type" value="create" checked onclick="toggleReg('create')"> 
+                    Založit novou rodinu
+                </label>
+                <label>
+                    <input type="radio" name="reg_type" value="join" onclick="toggleReg('join')"> 
+                    Připojit se kódem
+                </label>
+            </div>
+            <div id="create-group-inputs">
+                <input type="text" name="group_name" placeholder="Název rodiny (např. Novákovi)">
+            </div>
+            <div id="join-group-inputs" style="display:none;">
+                <input type="text" name="join_code" placeholder="Kód pro připojení (např. X9Y2Z1)">
+            </div>
+            <button type="submit" class="btn-secondary">Zaregistrovat</button>
+        </form>
+    </div>
+</div>
+<script>
+    function toggleReg(type) {
+        if (type === 'create') {
+            document.getElementById('create-group-inputs').style.display = 'block';
+            document.getElementById('join-group-inputs').style.display = 'none';
+        } else {
+            document.getElementById('create-group-inputs').style.display = 'none';
+            document.getElementById('join-group-inputs').style.display = 'block';
+        }
+    }
+</script>
+{% endblock %}

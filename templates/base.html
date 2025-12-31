@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vánoční Přání</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="logo">🎄 Rodinná Přání</div>
+        {% if current_user.is_authenticated %}
+        <div class="menu">
+            <span>Přihlášen: <b>{{ current_user.username }}</b></span>
+            <a href="{{ url_for('dashboard') }}">Všechna přání</a>
+            <a href="{{ url_for('my_reservations') }}">Můj nákupní seznam</a>
+            <a href="{{ url_for('logout') }}" class="btn-logout">Odhlásit</a>
+        </div>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
