@@ -20,7 +20,7 @@
                     <td>{{ wish.text }}</td>
                     <td>
                         {% if wish.url %}
-                        <a href="{{ wish.url }}" target="_blank">Otevřít</a>
+                        <a href="{{ wish.url if wish.url.startswith('http') else 'https://' + wish.url }}" target="_blank">Otevřít</a>
                         {% else %}
                         -
                         {% endif %}

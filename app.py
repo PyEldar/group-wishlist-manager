@@ -149,6 +149,12 @@ def dashboard():
 def add_wish():
     text = request.form.get('text')
     url = request.form.get('url')
+
+    if url:
+        url = url.strip()
+        if url and not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+
     if text:
         new_wish = Wish(text=text, url=url, owner=current_user)
         db.session.add(new_wish)

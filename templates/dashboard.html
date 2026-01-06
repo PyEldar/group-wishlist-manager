@@ -19,7 +19,7 @@
             <div class="wish-info">
                 <span class="wish-text">{{ wish.text }}</span>
                 {% if wish.url %}
-                    <a href="{{ wish.url }}" target="_blank" class="link-icon">🔗</a>
+                    <a href="{{ wish.url if wish.url.startswith('http') else 'https://' + wish.url }}" target="_blank" class="link-icon">🔗</a>
                 {% endif %}
             </div>
             <a href="{{ url_for('delete_wish', wish_id=wish.id) }}" class="delete-btn">×</a>
@@ -42,7 +42,7 @@
                     <div class="wish-content">
                         <strong>{{ wish.text }}</strong>
                         {% if wish.url %}
-                            <a href="{{ wish.url }}" target="_blank">🔗</a>
+                            <a href="{{ wish.url if wish.url.startswith('http') else 'https://' + wish.url }}" target="_blank">🔗</a>
                         {% endif %}
                     </div>
                     <div class="actions">
