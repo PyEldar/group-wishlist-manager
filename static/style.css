@@ -233,7 +233,6 @@ button:hover {
     border-radius: 4px;
     font-family: monospace;
     font-weight: bold;
-    letter-spacing: 2px;
     color: var(--text);
     border: 1px dashed #bdc3c7;
 }
