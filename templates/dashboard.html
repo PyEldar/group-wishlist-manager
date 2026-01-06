@@ -35,7 +35,7 @@
     {% for user in users %}
         {% if user != current_user %}
         <div class="family-card">
-            <h3>{{ user.username }}</h3>
+            <h3>{{ user.display_name }}</h3>
             <ul class="wish-list">
                 {% for wish in user.wishes %}
                 <li class="{% if wish.reserved_by and wish.reserved_by != current_user.id %}taken{% endif %}">

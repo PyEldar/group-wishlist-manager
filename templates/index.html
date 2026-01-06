@@ -4,7 +4,7 @@
     <div class="card">
         <h2>Přihlášení</h2>
         <form class="form-login" action="{{ url_for('login') }}" method="POST">
-            <input type="text" name="username" placeholder="Uživatelské jméno" required>
+            <input type="text" name="username" placeholder="Přihlašovací jméno/id" required>
             <input type="password" name="password" placeholder="Heslo" required>
             <button type="submit">Přihlásit</button>
         </form>
@@ -12,7 +12,8 @@
     <div class="card registration-card">
         <h2>Nová registrace</h2>
         <form action="{{ url_for('register') }}" method="POST">
-            <input type="text" name="username" placeholder="Tvé jméno" required>
+            <input type="text" name="username" placeholder="Přihlašovací jméno/id" required>
+            <input type="text" name="display_name" placeholder="Jméno v rodině (např. Táta)" required>
             <input type="password" name="password" placeholder="Heslo" required>
             <div class="radio-group">
                 <label>

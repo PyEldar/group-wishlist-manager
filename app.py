@@ -27,7 +27,8 @@ class Group(db.Model):
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(150), nullable=False)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    display_name = db.Column(db.String(150), nullable=False)
     password = db.Column(db.String(150), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable=False)
     wishes = db.relationship('Wish', foreign_keys='Wish.user_id', backref='owner', lazy=True)
@@ -64,11 +65,12 @@ def login():
 @app.route('/register', methods=['POST'])
 def register():
     username = request.form.get('username')
+    display_name = request.form.get('display_name')
     password = request.form.get('password')
     reg_type = request.form.get('reg_type')
     
     if User.query.filter_by(username=username).first():
-        flash('Uživatel s tímto jménem již existuje.', 'error')
+        flash('Uživatel s tímto přihlašovacím jménem/id již existuje.', 'error')
         return redirect(url_for('index'))
 
     hashed_pw = generate_password_hash(password, method='pbkdf2:sha256')
@@ -84,7 +86,7 @@ def register():
         new_group = Group(name=group_name, join_code=code)
         db.session.add(new_group)
         db.session.commit()
-        new_user = User(username=username, password=hashed_pw, group=new_group)
+        new_user = User(username=username, display_name=display_name, password=hashed_pw, group=new_group)
         
     elif reg_type == 'join':
         join_code = request.form.get('join_code').upper()
@@ -92,7 +94,7 @@ def register():
         if not group:
             flash('Neplatný kód rodiny.', 'error')
             return redirect(url_for('index'))
-        new_user = User(username=username, password=hashed_pw, group=group)
+        new_user = User(username=username, display_name=display_name, password=hashed_pw, group=group)
     else:
         return redirect(url_for('index'))
 

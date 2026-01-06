@@ -11,7 +11,7 @@
         <div class="logo">🎄 Rodinná Přání</div>
         {% if current_user.is_authenticated %}
         <div class="menu">
-            <span>Přihlášen: <b>{{ current_user.username }}</b></span>
+            <span>Přihlášen: <b>{{ current_user.display_name }}</b></span>
             <a href="{{ url_for('dashboard') }}">Všechna přání</a>
             <a href="{{ url_for('my_reservations') }}">Můj nákupní seznam</a>
             <a href="{{ url_for('logout') }}" class="btn-logout">Odhlásit</a>
