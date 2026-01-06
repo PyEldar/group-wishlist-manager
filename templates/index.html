@@ -17,19 +17,23 @@
             <input type="password" name="password" placeholder="Heslo" required>
             <div class="radio-group">
                 <label>
-                    <input type="radio" name="reg_type" value="create" checked onclick="toggleReg('create')"> 
-                    Založit novou rodinu
+                    <input type="radio" name="reg_type" value="create" 
+                           {% if not join_code %}checked{% endif %} 
+                           onclick="toggleReg('create')"> 
+                    Vytvořit novou rodinu
                 </label>
                 <label>
-                    <input type="radio" name="reg_type" value="join" onclick="toggleReg('join')"> 
-                    Připojit se kódem
+                    <input type="radio" name="reg_type" value="join" 
+                           {% if join_code %}checked{% endif %} 
+                           onclick="toggleReg('join')"> 
+                    Připojit se k existující
                 </label>
             </div>
             <div id="create-group-inputs">
                 <input type="text" name="group_name" placeholder="Název rodiny (např. Novákovi)">
             </div>
             <div id="join-group-inputs" style="display:none;">
-                <input type="text" name="join_code" placeholder="Kód pro připojení (např. X9Y2Z1)">
+                <input type="text" name="join_code" placeholder="Kód pro připojení (např. X9Y2Z1)" value="{{ join_code or '' }}">
             </div>
             <button type="submit" class="btn-secondary">Zaregistrovat</button>
         </form>

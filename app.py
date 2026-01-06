@@ -68,7 +68,8 @@ def load_user(user_id):
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
-    return render_template('index.html')
+    join_code = request.args.get('code')
+    return render_template('index.html', join_code=join_code)
 
 @app.route('/login', methods=['POST'])
 def login():
