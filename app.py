@@ -99,11 +99,11 @@ def register():
     hashed_pw = generate_password_hash(password, method='pbkdf2:sha256')
     
     if reg_type == 'create':
-        app.logger.info(f"Creating new group {group_name} and user '{username}'.")
         group_name = request.form.get('group_name')
         if not group_name:
             flash('Zadej název rodiny.', 'error')
             return redirect(url_for('index'))
+        app.logger.info(f"Creating new group {group_name} and user '{username}'.")
         code = generate_group_code()
         while Group.query.filter_by(join_code=code).first():
             code = generate_group_code()
