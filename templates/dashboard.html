@@ -6,7 +6,7 @@
         Pozvi ostatní tímto kódem: <span class="code">{{ current_user.group.join_code }}</span>
     </div>
     <div class="invite-box">
-        Nebo tímto odkazem: <span class="code">{{ url_for('index', code=current_user.group.join_code, _external=True) }}</span>
+        Nebo tímto odkazem: <span class="code">{{ url_for('index', code=current_user.group.join_code, _external=True) | replace('https://', '') | replace('http://', '') }}</span>
     </div>
 </div>
 <div class="my-section">
