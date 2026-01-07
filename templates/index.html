@@ -29,10 +29,10 @@
                     Připojit se k existující
                 </label>
             </div>
-            <div id="create-group-inputs" style="display:none;">
+            <div id="create-group-inputs" {% if join_code %}style="display:none;"{% endif %}>
                 <input type="text" name="group_name" placeholder="Název rodiny (např. Novákovi)">
             </div>
-            <div id="join-group-inputs">
+            <div id="join-group-inputs" {% if not join_code %}style="display:none;"{% endif %}>
                 <input type="text" name="join_code" placeholder="Kód pro připojení (např. X9Y2Z1)" value="{{ join_code or '' }}">
             </div>
             <button type="submit" class="btn-secondary">Zaregistrovat</button>
